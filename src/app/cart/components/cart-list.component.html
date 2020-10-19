@@ -1,0 +1,10 @@
+<h2>CartList component</h2>
+<div *ngIf="cartService.getCartProducts().length > 0; else emptyMsg">
+  <ul>
+    <li *ngFor="let cartProduct of cartProducts">{{getCartProductDescription(cartProduct)}}</li>
+  </ul>
+  <p>Total price: {{cartService.getTotalCartSum()}}$</p>
+</div>
+<ng-template #emptyMsg>
+  <h3>Cart is empty!</h3>
+</ng-template>
