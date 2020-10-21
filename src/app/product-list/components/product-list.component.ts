@@ -18,10 +18,12 @@ export class ProductListComponent implements OnInit {
   }
 
   getProductDescription(product: ProductModel): string {
+    // как вариант, эту логику можно вынести в сервис
     return `${product.name} (${product.description}): ${product.price}$`;
   }
 
   getAvailableProducts(): Array<ProductModel> {
+    // как вариант, эту логику можно вынести в сервис
     return this.products.filter(({isAvailable}) => isAvailable);
   }
 }

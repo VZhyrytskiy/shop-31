@@ -9,7 +9,7 @@ import {ProductModel} from '../../product/models/product.model';
 
 export class CartListComponent implements OnInit {
 
-  cartProducts: Array<ProductModel>;
+  cartProducts: Array<ProductModel>; // обычно еще добавляют количество купленного товара
 
   constructor(public cartService: CartService) {
   }
