@@ -1,0 +1,7 @@
+.cart-item {
+  display: block;
+}
+
+.cart-item button {
+  cursor: pointer;
+}

@@ -1,9 +1,18 @@
 <h2>CartList component</h2>
 <div *ngIf="cartService.getCartProducts().length > 0; else emptyMsg">
   <ul>
-    <li *ngFor="let cartProduct of cartProducts">{{getCartProductDescription(cartProduct)}}</li>
+    <li *ngFor="let cartItem of cartItems">
+      <app-cart-item
+        [appHighlight]="color"
+        [cartItem]="cartItem"
+        (removeItem)="onRemoveCartItem($event)"
+        (increaseItemAmount)="onIncreaseCartItemAmount($event)"
+        (reduceItemAmount)="onReduceCartItemAmount($event)"
+      ></app-cart-item>
+    </li>
   </ul>
   <p>Total price: {{cartService.getTotalCartSum()}}$</p>
+  <p>Total amount: {{cartService.getTotalCartAmount()}}</p>
 </div>
 <ng-template #emptyMsg>
   <h3>Cart is empty!</h3>

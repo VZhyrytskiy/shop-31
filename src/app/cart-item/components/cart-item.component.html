@@ -1,0 +1,11 @@
+<div class="cart-item">
+  <h3>Cart Item component</h3>
+  <p>
+    <span>Item: {{cartItem.product.name}}, </span>
+    <span>{{cartItem.product.price}}$</span>
+  </p>
+  <p>Amount: {{cartItem.amount}}</p>
+  <button type="button" (click)="onRemove()">Remove</button>
+  <button type="button" (click)="onIncreaseAmount()">+</button>
+  <button type="button" (click)="onReduceAmount()">-</button>
+</div>

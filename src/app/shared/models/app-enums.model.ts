@@ -1,6 +1,6 @@
 export enum CategoryEnum {
-  Chairs = 'Chairs',
-  Tables = 'Tables',
-  Beds = 'Beds',
-  Cabinets = 'Cabinets'
+  Chairs = 'Chair',
+  Tables = 'Table',
+  Beds = 'Bed',
+  Cabinets = 'Cabinet'
 }

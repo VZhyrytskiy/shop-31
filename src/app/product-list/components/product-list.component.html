@@ -1,6 +1,9 @@
 <h2>ProductList component</h2>
 <ul>
-  <li *ngFor="let product of getAvailableProducts()">
-    {{getProductDescription(product)}}
+  <li *ngFor="let product of products">
+    <app-product
+      [product]="product"
+      (addToCart)="onAddProductToCart(product)"
+    ></app-product>
   </li>
 </ul>

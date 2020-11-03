@@ -1,2 +1,16 @@
-<h2>Product component</h2>
-<button (click)="onBuy()">Buy</button>
+<div class='product-container' [ngClass]="setClasses()">
+  <h2>Product component</h2>
+  <ul>
+    <li>Name: {{product.name}}</li>
+    <li>Description: {{product.description}}</li>
+    <li>Price: {{product.price}}$</li>
+    <li>Category: {{product.category}}</li>
+    <li>Available: {{product.isAvailable}}</li>
+  </ul>
+  <button
+    [disabled]="!product.isAvailable"
+    (click)="onBuy()"
+  >Buy
+  </button>
+
+</div>
