@@ -1,24 +1,40 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+
 import {CartService} from '../services/cart.service';
-import {ProductModel} from '../../product/models/product.model';
+import {CartItemModel} from '../../cart-item/models/cartItem.model';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-cart-list',
   templateUrl: './cart-list.component.html'
 })
-
-export class CartListComponent implements OnInit {
-
-  cartProducts: Array<ProductModel>;
+export class CartListComponent implements OnInit, OnDestroy {
+  cartItems: Array<CartItemModel>;
+  color = 'bisque';
+  private sub: Subscription;
 
   constructor(public cartService: CartService) {
   }
 
   ngOnInit(): void {
-    this.cartProducts = this.cartService.getCartProducts();
+    this.sub = this.cartService.channel$.subscribe(
+      cartItems => this.cartItems = cartItems
+    );
   }
 
-  getCartProductDescription(cartProduct: ProductModel): string {
-    return `${cartProduct.name}: ${cartProduct.price}$`;
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
+  onRemoveCartItem(item: CartItemModel): void {
+    this.cartService.removeProductFromCart(item);
+  }
+
+  onIncreaseCartItemAmount(item: CartItemModel): void {
+    this.cartService.increaseCartItemAmount(item);
+  }
+
+  onReduceCartItemAmount(item: CartItemModel): void {
+    this.cartService.reduceCartItemAmount(item);
   }
 }

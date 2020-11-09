@@ -1,15 +1,24 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
+
+import {ProductModel} from '../models/product.model';
 
 @Component({
   selector: 'app-product',
-  templateUrl: './product.component.html'
+  templateUrl: './product.component.html',
+  styleUrls: ['./product.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-
-export class ProductComponent implements OnInit {
-  ngOnInit(): void {
-  }
+export class ProductComponent {
+  @Input() product: ProductModel;
+  @Output() addToCart: EventEmitter<void> = new EventEmitter<void>();
 
   onBuy(): void {
-    console.log('Product was bought!');
+    this.addToCart.emit();
+  }
+
+  setClasses(): any {
+    return {
+      'product-container_inactive': !this.product.isAvailable
+    };
   }
 }

@@ -1,0 +1,11 @@
+.product-container:not(.product-container_inactive) button {
+  cursor: pointer;
+}
+
+.product-container_inactive {
+  background-color: lightgray;
+}
+
+.product-container_inactive button {
+  cursor: default;
+}
