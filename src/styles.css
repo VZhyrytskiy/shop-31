@@ -6,6 +6,8 @@ button {
   background-color: #FFFFFF;
   margin: 5px 0;
   color: #000000;
+  outline: none;
+  cursor: pointer;
 }
 
 button:hover {
@@ -18,4 +20,5 @@ button:disabled:hover {
   border-color: #808080;
   color: #808080;
   background-color: #FFFFFF;
+  cursor: default;
 }

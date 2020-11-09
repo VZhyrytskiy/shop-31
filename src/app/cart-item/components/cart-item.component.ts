@@ -4,8 +4,7 @@ import {CartItemModel} from '../models/cartItem.model';
 
 @Component({
   selector: 'app-cart-item',
-  templateUrl: './cart-item.component.html',
-  styleUrls: ['./cart-item.component.css']
+  templateUrl: './cart-item.component.html'
 })
 export class CartItemComponent {
   @Input() cartItem: CartItemModel;

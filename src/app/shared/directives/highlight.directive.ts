@@ -7,6 +7,7 @@ export class HighlightDirective {
   @Input('appHighlight') highlightColor: string;
 
   constructor(private el: ElementRef) {
+    this.el.nativeElement.style.display = 'block';
   }
 
   @HostListener('mouseenter')
