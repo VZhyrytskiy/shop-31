@@ -1,5 +1,5 @@
 <h2>CartList component</h2>
-<div *ngIf="cartService.getCartProducts().length > 0; else emptyMsg">
+<div *ngIf="!cartService.isEmpty(); else emptyMsg">
   <ul>
     <li *ngFor="let cartItem of cartItems">
       <app-cart-item
@@ -11,8 +11,9 @@
       ></app-cart-item>
     </li>
   </ul>
-  <p>Total price: {{cartService.getTotalCartSum()}}$</p>
-  <p>Total amount: {{cartService.getTotalCartAmount()}}</p>
+  <button type="button" (click)="onRemoveAll()">Remove all</button>
+  <p>Total price: {{cartService.getTotalSum()}}$</p>
+  <p>Total amount: {{cartService.getTotalQuantity()}}</p>
 </div>
 <ng-template #emptyMsg>
   <h3>Cart is empty!</h3>

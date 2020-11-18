@@ -1,4 +1,4 @@
-<div class='product-container' [ngClass]="setClasses()">
+<div [appGoCrazy]="setCrazyTimes()" class='product-container' [ngClass]="setClasses()">
   <h2>Product component</h2>
   <ul>
     <li>Name: {{product.name}}</li>
@@ -7,10 +7,14 @@
     <li>Category: {{product.category}}</li>
     <li>Available: {{product.isAvailable}}</li>
   </ul>
+  <label>Amount:
+    <input type="number" #productAmount value="1" min="1" max="100" step="1"
+           [disabled]="!product.isAvailable"
+    >
+  </label>
   <button
     [disabled]="!product.isAvailable"
     (click)="onBuy()"
   >Buy
   </button>
-
 </div>

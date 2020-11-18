@@ -30,7 +30,6 @@ const products = [
 @Injectable({
   providedIn: 'root'
 })
-
 export class ProductService {
   getProducts(): Array<ProductModel> {
     return products;

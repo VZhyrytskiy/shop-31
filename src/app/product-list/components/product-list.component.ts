@@ -25,7 +25,7 @@ export class ProductListComponent implements OnInit {
     return this.products.filter(({isAvailable}) => isAvailable);
   }
 
-  onAddProductToCart(product: ProductModel): void {
-    this.cartService.addProductToCart(product);
+  onAddProductToCart(product: ProductModel, amount: number): void {
+    this.cartService.addProduct(product, amount);
   }
 }

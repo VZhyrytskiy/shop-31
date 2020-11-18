@@ -2,13 +2,18 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
 import {HighlightDirective} from './directives/highlight.directive';
+import {GoCrazyDirective} from './directives/go-crazy.directive';
 
 @NgModule({
   imports: [CommonModule],
   declarations: [
-    HighlightDirective
+    HighlightDirective,
+    GoCrazyDirective
   ],
-  exports: [HighlightDirective]
+  exports: [
+    HighlightDirective,
+    GoCrazyDirective
+  ]
 })
 export class SharedModule {
 }
