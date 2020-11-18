@@ -1,13 +1,24 @@
-button {
-  display: inline-block;
-  padding: 0.7rem 1.5rem;
-  border: 2px solid #000000;
+button,
+input[type="number"] {
+  box-sizing: border-box;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-width: 4.5rem;
+  padding: 0.5rem;
+  margin: 5px 2px;
+  border: 1px solid #000000;
   border-radius: 6px;
   background-color: #FFFFFF;
-  margin: 5px 0;
   color: #000000;
   outline: none;
   cursor: pointer;
+}
+
+input[type="number"] {
+  padding-right: 0.5rem;
+  cursor: default;
 }
 
 button:hover {
@@ -16,9 +27,15 @@ button:hover {
 }
 
 button:disabled,
-button:disabled:hover {
+button:disabled:hover,
+input[type="number"]:disabled {
   border-color: #808080;
   color: #808080;
   background-color: #FFFFFF;
   cursor: default;
+}
+
+.crazy {
+  background-color: #000000;
+  color: #FFFFFF;
 }

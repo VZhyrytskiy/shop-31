@@ -27,14 +27,18 @@ export class CartListComponent implements OnInit, OnDestroy {
   }
 
   onRemoveCartItem(item: CartItemModel): void {
-    this.cartService.removeProductFromCart(item);
+    this.cartService.removeProduct(item);
   }
 
   onIncreaseCartItemAmount(item: CartItemModel): void {
-    this.cartService.increaseCartItemAmount(item);
+    this.cartService.increaseQuantity(item);
   }
 
   onReduceCartItemAmount(item: CartItemModel): void {
-    this.cartService.reduceCartItemAmount(item);
+    this.cartService.decreaseQuantity(item);
+  }
+
+  onRemoveAll(): void {
+    this.cartService.removeAllProducts();
   }
 }

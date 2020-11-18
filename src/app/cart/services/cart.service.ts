@@ -1,65 +1,85 @@
 import {Injectable} from '@angular/core';
 
-import {ProductModel} from '../../product/models/product.model';
-import {CartItemModel} from '../../cart-item/models/cartItem.model';
 import {Subject} from 'rxjs';
 
-const cartItems = [];
+import {ProductModel} from '../../product/models/product.model';
+import {CartItemModel} from '../../cart-item/models/cartItem.model';
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class CartService {
-
   private channel = new Subject<Array<CartItemModel>>();
   public channel$ = this.channel.asObservable();
 
+  private cartProducts: Array<CartItemModel> = [];
+  private totalQuantity: number;
+  private totalSum: number;
+
   getCartProducts(): Array<CartItemModel> {
-    return cartItems;
+    return this.cartProducts;
   }
 
-  getTotalCartSum(): number {
-    return cartItems.reduce((sum, i) => sum += i.amount * i.product.price, 0);
+  getTotalSum(): number {
+    return this.totalSum;
   }
 
-  getTotalCartAmount(): number {
-    return cartItems.reduce((totalAmount, {amount}) => totalAmount += amount, 0);
+  getTotalQuantity(): number {
+    return this.totalQuantity;
   }
 
-  addProductToCart(product: ProductModel): void {
-    const [addedProduct] = cartItems.filter(i => {
+  addProduct(product: ProductModel, amount: number): void {
+    const [addedProduct] = this.cartProducts.filter(i => {
       return i.product.name === product.name;
     });
     if (addedProduct) {
-      addedProduct.amount++;
+      addedProduct.amount = addedProduct.amount + amount;
+      this.updateCartData();
       return;
     }
-    cartItems.push(new CartItemModel(product));
-    this.channel.next(cartItems);
+    this.cartProducts.push(new CartItemModel(product, amount));
+    this.channel.next(this.cartProducts);
+    this.updateCartData();
   }
 
-  removeProductFromCart(cartItemToRemove: CartItemModel): void {
-    const indexToRemove = cartItems.findIndex(
+  removeProduct(cartItemToRemove: CartItemModel): void {
+    const indexToRemove = this.cartProducts.findIndex(
       i => i.product.name === cartItemToRemove.product.name
     );
-    cartItems.splice(indexToRemove, 1);
+    this.cartProducts.splice(indexToRemove, 1);
+    this.updateCartData();
   }
 
-  increaseCartItemAmount(cartItemToRemove: CartItemModel): void {
-    const indexToRemove = cartItems.findIndex(
-      i => i.product.name === cartItemToRemove.product.name
-    );
-    cartItems[indexToRemove].amount++;
+  removeAllProducts(): void {
+    this.cartProducts = [];
+    this.updateCartData();
   }
 
-  reduceCartItemAmount(cartItemToRemove: CartItemModel): void {
-    const indexToRemove = cartItems.findIndex(
+  updateCartData(): void {
+    this.totalSum = this.cartProducts.reduce((sum, i) => sum += i.amount * i.product.price, 0);
+    this.totalQuantity = this.cartProducts.reduce((totalAmount, {amount}) => totalAmount += amount, 0);
+  }
+
+  isEmpty(): boolean {
+    return !this.totalQuantity;
+  }
+
+  increaseQuantity(cartItemToRemove: CartItemModel): void {
+    const indexToRemove = this.cartProducts.findIndex(
       i => i.product.name === cartItemToRemove.product.name
     );
-    cartItems[indexToRemove].amount--;
-    if (cartItems[indexToRemove].amount === 0) {
-      cartItems.splice(indexToRemove, 1);
+    this.cartProducts[indexToRemove].amount++;
+    this.updateCartData();
+  }
+
+  decreaseQuantity(cartItemToRemove: CartItemModel): void {
+    const indexToRemove = this.cartProducts.findIndex(
+      i => i.product.name === cartItemToRemove.product.name
+    );
+    this.cartProducts[indexToRemove].amount--;
+    if (this.cartProducts[indexToRemove].amount === 0) {
+      this.cartProducts.splice(indexToRemove, 1);
     }
+    this.updateCartData();
   }
 }

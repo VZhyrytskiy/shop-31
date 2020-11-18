@@ -16,3 +16,11 @@
 5. В `AppComponent` добавила шаблонную переменную `#appTitle`
 6. Добавила директиву `HighlightDirective`
 7. Товары в корзине группируются по имени
+
+### Task 3. Services and DI
+1. Модифицировала сервис `CartService` согласно требованиям
+2. Добавила сервис `LocalStorageService`, добавила его использование в `FirstComponent`
+3. Добавила сервис `ConfigOptionsService`, добавила его использование в `FirstComponent`
+4. Добавила сервис `ConstantsService`, добавила его использование в `FirstComponent`
+5. Добавила сервис `GeneratorService`, добавила его использование в `FirstComponent`
+6. Создала директиву `GoCrazyDirective`, добавила ее использование в шаблоне `ProductComponent`
