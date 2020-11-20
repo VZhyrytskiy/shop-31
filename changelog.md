@@ -24,3 +24,10 @@
 4. Добавила сервис `ConstantsService`, добавила его использование в `FirstComponent`
 5. Добавила сервис `GeneratorService`, добавила его использование в `FirstComponent`
 6. Создала директиву `GoCrazyDirective`, добавила ее использование в шаблоне `ProductComponent`
+
+### Task 4. Pipes
+1. В шаблон компонента `ProductComponent` добавила пайпы `currency` для форматирования цены и `uppercase` для форматирования категории
+2. В шаблон компонента `CartItemComponent` добавила пайп `currency` для форматирования цены
+3. `ProductListComponent` добавила пайп `async`, а метод `getProducts()` сервиса `ProductService` теперь возвращает промис.
+4. Добавила пайп `OrderByPipe`, добавила его использование в шаблоне и в коде компонента `CartListComponent`
+5. Добавила экспорт `CommonModule` и `FormsModule` из `SharedModule`, убрала их из импорта других модулей

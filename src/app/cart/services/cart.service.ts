@@ -20,6 +20,19 @@ export class CartService {
     return this.cartProducts;
   }
 
+  setCartProducts(cartProducts: Array<CartItemModel>): void {
+    this.cartProducts = cartProducts;
+    this.channel.next(this.cartProducts);
+    this.totalSum = this.cartProducts.reduce(
+      (sum, i) => sum += i.amount * i.product.price,
+      0
+    );
+    this.totalQuantity = this.cartProducts.reduce(
+      (totalAmount, {amount}) => totalAmount += amount,
+      0
+    );
+  }
+
   getTotalSum(): number {
     return this.totalSum;
   }
@@ -29,57 +42,65 @@ export class CartService {
   }
 
   addProduct(product: ProductModel, amount: number): void {
-    const [addedProduct] = this.cartProducts.filter(i => {
-      return i.product.name === product.name;
-    });
-    if (addedProduct) {
-      addedProduct.amount = addedProduct.amount + amount;
-      this.updateCartData();
-      return;
+    const index = this.cartProducts.findIndex(
+      i => i.product.name === product.name
+    );
+    if (index !== -1) {
+      this.setCartProducts([
+        ...this.cartProducts.slice(0, index),
+        {
+          ...this.cartProducts[index],
+          amount: this.cartProducts[index].amount + amount
+        },
+        ...this.cartProducts.slice(index + 1)
+      ]);
+    } else {
+      this.setCartProducts([
+        ...this.cartProducts,
+        new CartItemModel(product, amount)
+      ]);
     }
-    this.cartProducts.push(new CartItemModel(product, amount));
-    this.channel.next(this.cartProducts);
-    this.updateCartData();
   }
 
   removeProduct(cartItemToRemove: CartItemModel): void {
-    const indexToRemove = this.cartProducts.findIndex(
+    const index = this.cartProducts.findIndex(
       i => i.product.name === cartItemToRemove.product.name
     );
-    this.cartProducts.splice(indexToRemove, 1);
-    this.updateCartData();
+    this.setCartProducts([
+      ...this.cartProducts.slice(0, index),
+      ...this.cartProducts.slice(index + 1)
+    ]);
   }
 
   removeAllProducts(): void {
-    this.cartProducts = [];
-    this.updateCartData();
-  }
-
-  updateCartData(): void {
-    this.totalSum = this.cartProducts.reduce((sum, i) => sum += i.amount * i.product.price, 0);
-    this.totalQuantity = this.cartProducts.reduce((totalAmount, {amount}) => totalAmount += amount, 0);
+    this.setCartProducts([]);
   }
 
   isEmpty(): boolean {
     return !this.totalQuantity;
   }
 
-  increaseQuantity(cartItemToRemove: CartItemModel): void {
-    const indexToRemove = this.cartProducts.findIndex(
-      i => i.product.name === cartItemToRemove.product.name
-    );
-    this.cartProducts[indexToRemove].amount++;
-    this.updateCartData();
+  increaseQuantity(cartItem: CartItemModel): void {
+    this.setCartProducts(this.cartProducts.map(cartProduct => {
+      if (cartProduct.product.name === cartItem.product.name) {
+        return {
+          ...cartProduct,
+          amount: cartProduct.amount + 1
+        };
+      }
+      return cartProduct;
+    }));
   }
 
-  decreaseQuantity(cartItemToRemove: CartItemModel): void {
-    const indexToRemove = this.cartProducts.findIndex(
-      i => i.product.name === cartItemToRemove.product.name
-    );
-    this.cartProducts[indexToRemove].amount--;
-    if (this.cartProducts[indexToRemove].amount === 0) {
-      this.cartProducts.splice(indexToRemove, 1);
-    }
-    this.updateCartData();
+  decreaseQuantity(cartItem: CartItemModel): void {
+    this.setCartProducts(this.cartProducts.map(cartProduct => {
+      if (cartProduct.product.name === cartItem.product.name) {
+        return {
+          ...cartProduct,
+          amount: cartProduct.amount - 1
+        };
+      }
+      return cartProduct;
+    }));
   }
 }
