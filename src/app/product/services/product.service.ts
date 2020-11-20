@@ -31,7 +31,7 @@ const products = [
   providedIn: 'root'
 })
 export class ProductService {
-  getProducts(): Array<ProductModel> {
-    return products;
+  getProducts(): Promise<Array<ProductModel>> {
+    return new Promise(resolve => resolve(products));
   }
 }

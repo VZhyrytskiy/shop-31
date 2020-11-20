@@ -2,7 +2,7 @@
   <h3>Cart Item component</h3>
   <p>
     <span>Item: {{cartItem.product.name}}, </span>
-    <span>{{cartItem.product.price}}$</span>
+    <span>{{cartItem.product.price | currency:'USD':'symbol':'3.0-2'}}</span>
   </p>
   <p>Amount: {{cartItem.amount}}</p>
   <button type="button" (click)="onRemove()">Remove</button>

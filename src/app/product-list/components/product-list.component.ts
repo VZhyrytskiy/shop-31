@@ -9,7 +9,7 @@ import {CartService} from '../../cart/services/cart.service';
   templateUrl: './product-list.component.html'
 })
 export class ProductListComponent implements OnInit {
-  products: Array<ProductModel>;
+  products: Promise<Array<ProductModel>>;
 
   constructor(
     private productService: ProductService,
@@ -19,10 +19,6 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     this.products = this.productService.getProducts();
-  }
-
-  getAvailableProducts(): Array<ProductModel> {
-    return this.products.filter(({isAvailable}) => isAvailable);
   }
 
   onAddProductToCart(product: ProductModel, amount: number): void {

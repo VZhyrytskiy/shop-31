@@ -3,8 +3,8 @@
   <ul>
     <li>Name: {{product.name}}</li>
     <li>Description: {{product.description}}</li>
-    <li>Price: {{product.price}}$</li>
-    <li>Category: {{product.category}}</li>
+    <li>Price: {{product.price | currency:'USD':'symbol':'3.0-2'}}</li>
+    <li>Category: {{product.category | uppercase}}</li>
     <li>Available: {{product.isAvailable}}</li>
   </ul>
   <label>Amount:
