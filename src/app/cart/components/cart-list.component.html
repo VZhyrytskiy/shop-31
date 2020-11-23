@@ -2,6 +2,7 @@
 <div *ngIf="!cartService.isEmpty(); else emptyMsg">
   <select #orderValue (change)="onOrderChange($event)">
     <option disabled>Order by:</option>
+    <!-- Зачем использовать префикс "product," а не просто "name", "price" -->
     <option selected value="product,name">Name</option>
     <option value="product,price">Price</option>
     <option value="amount">Amount</option>
