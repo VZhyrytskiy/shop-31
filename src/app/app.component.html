@@ -1,4 +1,24 @@
 <h1 #appTitle></h1>
-<app-first></app-first>
-<app-product-list></app-product-list>
-<app-cart-list></app-cart-list>
+<nav class="navigation">
+  <ul>
+    <li routerLinkActive="menu-item_active">
+      <a routerLink="/products-list">Products</a>
+    </li>
+    <li routerLinkActive="menu-item_active">
+      <a routerLink="/cart">Cart</a>
+    </li>
+    <li routerLinkActive="menu-item_active">
+      <a routerLink="/admin">Admin</a>
+    </li>
+    <li routerLinkActive="menu-item_active">
+      <a routerLink="/login">Login</a>
+    </li>
+    <li routerLinkActive="menu-item_active">
+      <a routerLink="/first">First</a>
+    </li>
+  </ul>
+</nav>
+<router-outlet
+  #routerOutlet="outlet"
+  (activate)='onActivate($event, routerOutlet)'>
+</router-outlet>

@@ -1,0 +1,21 @@
+.admin-navigation_active a {
+  border-bottom: 2px solid darkred;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  display: inline-block;
+  padding: 7px;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  font-size: 20px;
+  color: black;
+}
+
+a:hover {
+  color: darkred;
+}

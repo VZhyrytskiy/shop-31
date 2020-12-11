@@ -1,0 +1,15 @@
+<h3>Login</h3>
+<p>State: {{message}}</p>
+<p>
+  <button
+    class="button"
+    (click)="onLogout()"
+    *ngIf="authService.isLoggedIn; else loginBtn">Logout
+  </button>
+  <ng-template #loginBtn>
+    <button
+      class="button"
+      (click)="onLogin()">Login
+    </button>
+  </ng-template>
+</p>

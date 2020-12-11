@@ -1,0 +1,9 @@
+<button (click)="onAddProduct()">Add Product</button>
+<ul>
+  <li *ngFor="let product of products | async">
+    <app-product
+      [product]="product"
+      (reviewProduct)="onReviewProduct($event)"
+    ></app-product>
+  </li>
+</ul>

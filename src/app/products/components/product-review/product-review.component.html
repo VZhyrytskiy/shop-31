@@ -1,0 +1,28 @@
+<div>
+  <h2>Product Review</h2>
+  <ul>
+    <li *ngIf="product.img">
+      <img src="{{product.img}}" alt="{{product.name}}">
+    </li>
+    <li>Name: {{product.name}}</li>
+    <li>Category: {{product.category | titlecase}}</li>
+    <li>Description: {{product.description}}</li>
+    <li>Price: {{product.price | currency:'USD':'symbol':'3.0-2'}}</li>
+    <li>Available: {{product.isAvailable}}</li>
+  </ul>
+  <label>Amount:
+    <input type="number" #productAmount value="1" min="1" max="100" step="1"
+           [disabled]="!product.isAvailable"
+    >
+  </label>
+  <button
+    [disabled]="!product.isAvailable"
+    (click)="onBuy()"
+  >Buy
+  </button>
+  <button
+    type="button"
+    class="btn btn-primary"
+    (click)="onGoBack()">Back
+  </button>
+</div>

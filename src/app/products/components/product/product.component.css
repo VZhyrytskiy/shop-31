@@ -1,0 +1,11 @@
+.product-container {
+  margin-bottom: 10px;
+}
+
+.product-container_inactive {
+  background-color: lightgray;
+}
+
+li {
+  margin-bottom: 6px;
+}

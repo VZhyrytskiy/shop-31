@@ -1,0 +1,47 @@
+<div>
+  <h3>New Order Form</h3>
+  <div *ngIf="order && order.items.length > 0; else emptyMsg">
+    <h4>Your order details</h4>
+    <ol>
+      <li *ngFor="let orderItem of order.items">
+        <ul>
+          <li>Item: {{orderItem.product.name}}, {{orderItem.product.category}}</li>
+          <li>Price: {{orderItem.product.price}}</li>
+          <li>Amount: {{orderItem.amount}}</li>
+        </ul>
+      </li>
+    </ol>
+    <p class="order-summary">Total sum: {{order.totalSum | currency:'USD':'symbol':'3.0-2'}}</p>
+    <form class="order-form" (ngSubmit)="onAddOrder()" id="order-form" #form="ngForm">
+      <div class="order-inputs">
+        <label for="name">Your Name</label>
+        <input type="text"
+               id="name" name="name"
+               placeholder="Name"
+               required
+               [(ngModel)]="order.name">
+      </div>
+      <div class="order-inputs">
+        <label for="address">Your Address</label>
+        <input type="text"
+               id="address" name="address"
+               placeholder="Address"
+               required
+               [(ngModel)]="order.address">
+      </div>
+      <div>
+        <button
+          type="submit"
+          [disabled]="form.invalid">Confirm
+        </button>
+        <button
+          type="button"
+          (click)="onGoBack()">Back
+        </button>
+      </div>
+    </form>
+  </div>
+  <ng-template #emptyMsg>
+    <h3>Nothing to order - cart is empty!</h3>
+  </ng-template>
+</div>
