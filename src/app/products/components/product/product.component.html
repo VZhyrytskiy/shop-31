@@ -1,0 +1,9 @@
+<div [appGoCrazy]="setTimesOfBeingCrazy()" class='product-container' [ngClass]="setClasses()">
+  <h3>{{product.name}} {{product.category | titlecase}}</h3>
+  <ul>
+    <li>{{product.description}}</li>
+    <li>{{product.price | currency:'USD':'symbol':'3.0-2'}}</li>
+    <li>{{product.isAvailable ? '' : 'Not '}}Available</li>
+  </ul>
+  <button (click)="onReviewProduct()">Open</button>
+</div>

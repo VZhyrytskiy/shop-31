@@ -1,0 +1,18 @@
+.order-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.order-inputs {
+  padding: 10px 0;
+}
+
+.order-inputs label {
+  display: inline-block;
+  margin-right: 10px;
+  min-width: 90px;
+}
+
+.order-summary {
+  font-weight: bold;
+}

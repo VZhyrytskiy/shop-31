@@ -1,28 +1,44 @@
 import {Injectable} from '@angular/core';
 
-import {Subject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 
-import {ProductModel} from '../../product/models/product.model';
-import {CartItemModel} from '../../cart-item/models/cartItem.model';
+import {CartItemModel} from '../models/cartItem.model';
+import {ProductModel} from '../../products/models/product.model';
+import {LocalStorageService} from '../../core';
+
+const CART_KEY_NAME = 'cart-items';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  private channel = new Subject<Array<CartItemModel>>();
-  public channel$ = this.channel.asObservable();
+  private cartProducts: CartItemModel[] = [];
+  private channel: BehaviorSubject<CartItemModel[]>;
 
-  private cartProducts: Array<CartItemModel> = [];
   private totalQuantity: number;
   private totalSum: number;
 
-  getCartProducts(): Array<CartItemModel> {
-    return this.cartProducts;
+  constructor(private localStorageService: LocalStorageService) {
+    const cartSavedItems = this.localStorageService.getItem(CART_KEY_NAME);
+    if (cartSavedItems) {
+      this.cartProducts = cartSavedItems as CartItemModel[];
+      this.calculateAdditionalProperties();
+    }
+    this.channel = new BehaviorSubject<CartItemModel[]>(this.cartProducts);
+  }
+
+  get channel$(): Observable<CartItemModel[]> {
+    return this.channel.asObservable();
   }
 
   setCartProducts(cartProducts: Array<CartItemModel>): void {
     this.cartProducts = cartProducts;
     this.channel.next(this.cartProducts);
+    this.localStorageService.setItem(CART_KEY_NAME, this.cartProducts);
+    this.calculateAdditionalProperties();
+  }
+
+  calculateAdditionalProperties(): void {
     this.totalSum = this.cartProducts.reduce(
       (sum, i) => sum += i.amount * i.product.price,
       0
@@ -80,24 +96,12 @@ export class CartService {
     return !this.totalQuantity;
   }
 
-  increaseQuantity(cartItem: CartItemModel): void {
+  changeQuantity(cartItem: CartItemModel, decrease = false): void {
     this.setCartProducts(this.cartProducts.map(cartProduct => {
       if (cartProduct.product.name === cartItem.product.name) {
         return {
           ...cartProduct,
-          amount: cartProduct.amount + 1
-        };
-      }
-      return cartProduct;
-    }));
-  }
-
-  decreaseQuantity(cartItem: CartItemModel): void {
-    this.setCartProducts(this.cartProducts.map(cartProduct => {
-      if (cartProduct.product.name === cartItem.product.name) {
-        return {
-          ...cartProduct,
-          amount: cartProduct.amount - 1
+          amount: cartProduct.amount + (decrease ? (-1) : 1)
         };
       }
       return cartProduct;

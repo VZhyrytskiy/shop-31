@@ -1,0 +1,16 @@
+<div class="panel-body">
+  <h3>Order Id #{{order.id}}</h3>
+  <ul>
+    <li>Customer: {{order.name}}</li>
+    <li>Address: {{order.address}}</li>
+    <li>
+      <ol>
+        <li *ngFor="let orderItem of order.items">
+          {{orderItem.product.name}} {{orderItem.product.category | titlecase}},
+          {{orderItem.product.price | currency:'USD':'symbol':'3.0-2'}},
+          {{orderItem.amount}} pieces
+        </li>
+      </ol>
+    </li>
+  </ul>
+</div>

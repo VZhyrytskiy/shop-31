@@ -1,0 +1,43 @@
+.navigation {
+  width: 100%;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.navigation > ul {
+  display: flex;
+  justify-content: space-evenly;
+  list-style-type: none;
+}
+
+.navigation li:not(:last-child) {
+  margin-right: 0.5rem;
+}
+
+.navigation a {
+  display: inline-block;
+  padding: 0.5rem 2rem;
+  min-width: 155px;
+  font-size: 1.6rem;
+  text-decoration: none;
+  text-align: center;
+  color: black;
+  cursor: pointer;
+}
+
+.navigation li {
+  border-bottom: 2px solid transparent;
+}
+
+.navigation li:hover {
+  background-color: black;
+  border-bottom: 2px solid transparent;
+}
+
+.navigation li:hover a {
+  color: white;
+}
+
+.navigation .menu-item_active {
+  border-bottom: 2px solid darkred;
+}

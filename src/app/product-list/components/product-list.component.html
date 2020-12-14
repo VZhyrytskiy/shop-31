@@ -1,9 +1,0 @@
-<h2>ProductList component</h2>
-<ul>
-  <li *ngFor="let product of products | async">
-    <app-product
-      [product]="product"
-      (addToCart)="onAddProductToCart(product, $event)"
-    ></app-product>
-  </li>
-</ul>

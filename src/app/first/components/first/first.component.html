@@ -1,0 +1,22 @@
+<h2>First component</h2>
+<h3>LocalStorageService Demo</h3>
+<h4>Hello,
+  <span
+    #userName
+    (blur)="setName($event)"
+    (keypress)="setName($event)"
+    contenteditable="true"
+  >[Enter Name]</span>
+</h4>
+<h3>ConfigOptionsService Demo</h3>
+<p>{{displayConfigOptions()}}</p>
+<h3>ConstantsService Demo</h3>
+<p>{{displayConstants()}}</p>
+<h3>GeneratorService Demo</h3>
+<div *ngIf="randomStrings && randomStrings.length >= 2; else noServiceMsg">
+  <p>Randomly generated string of 5: {{randomStrings[0]}}</p>
+  <p>Randomly generated string of 10: {{randomStrings[1]}}</p>
+</div>
+<ng-template #noServiceMsg>
+  <p>No GeneratorService was found!</p>
+</ng-template>

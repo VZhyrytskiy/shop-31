@@ -31,3 +31,19 @@
 3. `ProductListComponent` добавила пайп `async`, а метод `getProducts()` сервиса `ProductService` теперь возвращает промис.
 4. Добавила пайп `OrderByPipe`, добавила его использование в шаблоне и в коде компонента `CartListComponent`
 5. Добавила экспорт `CommonModule` и `FormsModule` из `SharedModule`, убрала их из импорта других модулей
+
+### Task 5. Routing
+1. Реализовала роут списка товаров - `/products-list`, который является также стартовой страницей приложения
+2. Реализовала роут карточки товара - `/product/:productID`
+3. Добавила `resolve` guard для роута `/product/:productID`
+4. Реализовала роут корзины - `/cart`
+5. Реализовала роут формирования заказа - `/order`
+6. Реализовала роут админки - `/admin`
+7. Добавила гард `canActivate` для `/admin` + `AuthService` + `LoginComponent`
+8. Добавила гард `canLoad` для `/admin`  
+9. Реализовала роут списка товаров в админке - `/admin/products`
+10. Реализовала роут добавления товара - `/admin/product/add`
+11. Реализовала роут редактирования товара - `/admin/product/edit:productID`
+12. Добавила `resolve` guard для роута `/admin/product/edit:productID` (переиспользование гарда из пункта 3)
+13. Реализовала роут просмотра списка заказов - `/admin/orders`
+14. Работа с `localStorage` добавлена для `OrdersService` (храние списка заказок) и `CartService` (хранение списка товаров корзины)

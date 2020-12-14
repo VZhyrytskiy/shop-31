@@ -1,0 +1,39 @@
+<div>
+  <h3>Product Form</h3>
+  <div>
+    <form *ngIf="product" (ngSubmit)="onSaveProduct()" id="product-form" #form="ngForm">
+      <div>
+        <label for="productName">Product Name</label>
+        <input type="text"
+               id="productName" name="productName"
+               placeholder="Product Name"
+               required
+               [(ngModel)]="product.name">
+      </div>
+      <div>
+        <label for="description">Description</label>
+        <input type="text"
+               id="description" name="description"
+               placeholder="Description"
+               required
+               [(ngModel)]="product.description">
+      </div>
+      <div>
+        <label for="price">Price</label>
+        <input type="number" min="0"
+               id="price" name="price"
+               placeholder="Price"
+               required
+               [(ngModel)]="product.price">
+      </div>
+      <button
+        type="submit"
+        [disabled]="form.invalid">Save
+      </button>
+      <button
+        type="button"
+        (click)="onGoBack()">Back
+      </button>
+    </form>
+  </div>
+</div>
