@@ -20,11 +20,11 @@ const routes: Routes = [
         component: ManageProductsComponent,
       },
       {
-        path: 'product/add',
+        path: 'products/add',
         component: ProductFormComponent,
       },
       {
-        path: 'product/edit/:productID',
+        path: 'products/edit/:productID',
         component: ProductFormComponent,
         data: {
           admin: true

@@ -22,10 +22,10 @@ export class ManageProductsComponent implements OnInit {
   }
 
   onReviewProduct(product: ProductModel): void {
-    this.router.navigate(['/admin/product/edit', product.id]);
+    this.router.navigate(['/admin/products/edit', product.id]);
   }
 
   onAddProduct(): void {
-    this.router.navigate(['/admin/product/add']);
+    this.router.navigate(['/admin/products/add']);
   }
 }
